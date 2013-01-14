@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<handlers>
+	<handler>
+    	<action>login</action>
+    	<handler-class>farmapp.service.handlers.LoginHandler</handler-class>   
+	</handler>   
+	<handler>
+    	<action>checkuser</action>
+    	<handler-class>farmapp.service.handlers.CheckUserHandler</handler-class>   
+	</handler>  
+	<handler>
+    	<action>register</action>
+    	<handler-class>farmapp.service.handlers.RegisterHandler</handler-class>   
+	</handler> 
+	<handler auth="true">
+    	<action>listgames</action>
+    	<handler-class>farmapp.service.handlers.ListGamesHandler</handler-class>   
+	</handler>
+	<handler auth="true">
+    	<action>logout</action>
+    	<handler-class>farmapp.service.handlers.LogoutHandler</handler-class>   
+	</handler>
+	<handler>
+    	<action>logged</action>
+    	<handler-class>farmapp.service.handlers.LoggedHandler</handler-class>   
+	</handler>
+	<handler>
+    	<action>search</action>
+    	<handler-class>farmapp.service.handlers.SearchHandler</handler-class>   
+	</handler>
+	<handler>
+    	<action auth="true">info</action>
+    	<handler-class>farmapp.service.handlers.InfoHandler</handler-class>   
+	</handler>
+	<handler>
+    	<action auth="true">listfarm</action>
+    	<handler-class>farmapp.service.handlers.ListFarm</handler-class>   
+	</handler>
+	<handler>
+    	<action auth="true">listprod</action>
+    	<handler-class>farmapp.service.handlers.ListProd2</handler-class>   
+	</handler>
+	<handler>
+    	<action auth="true">listpedidosfarm</action>
+    	<handler-class>farmapp.service.handlers.ListPedidosFarm</handler-class>   
+	</handler>
+	<handler>
+    	<action auth="true">listpedidosuser</action>
+    	<handler-class>farmapp.service.handlers.ListPedidosUser</handler-class>   
+	</handler>
+	<handler>
+    	<action auth="true">modprecio</action>
+    	<handler-class>farmapp.service.handlers.ModificarPrecio</handler-class>   
+	</handler>
+	<handler>
+    	<action auth="true">registfarm</action>
+    	<handler-class>farmapp.service.handlers.Registrarfarmacia</handler-class>   
+	</handler>
+	<handler>
+    	<action auth="true">insprod</action>
+    	<handler-class>farmapp.service.handlers.InsertarProductos</handler-class>   
+	</handler>
+	<handler>
+    	<action auth="true">insprodfarm</action>
+    	<handler-class>farmapp.service.handlers.InsertarProductoFarmacia</handler-class>   
+	</handler>
+	<handler>
+    	<action auth="true">insped</action>
+    	<handler-class>farmapp.service.handlers.InsertarPedido</handler-class>   
+	</handler>
+	<handler>
+    	<action auth="true">listciudades</action>
+    	<handler-class>farmapp.service.handlers.ListarCiudades</handler-class>   
+	</handler>
+	<handler>
+    	<action auth="true">listfarmaceuticos</action>
+    	<handler-class>farmapp.service.handlers.ListarFarmaceuticos</handler-class>   
+	</handler>
+	<handler>
+    	<action>listfarmacias</action>
+    	<handler-class>farmapp.service.handlers.ListarFarmacias</handler-class>   
+	</handler>
+	<handler>
+    	<action auth="true">infofarm</action>
+    	<handler-class>farmapp.service.handlers.InfoFarmacia</handler-class>   
+	</handler>
+	<handler>
+    	<action auth="true">elimprod</action>
+    	<handler-class>farmapp.service.handlers.EliminarProductos</handler-class>   
+	</handler>
+	<handler>
+    	<action auth="true">elimprodfarm</action>
+    	<handler-class>farmapp.service.handlers.EliminarProductosFarmacia</handler-class>   
+	</handler>
+	<handler>
+    	<action auth="true">elimfarm</action>
+    	<handler-class>farmapp.service.handlers.EliminarFarmacia</handler-class>   
+	</handler>
+
+<handler>
+    	<action auth="true">listproductos</action>
+    	<handler-class>farmapp.service.handlers.ListarProductos</handler-class>   
+	</handler>
+</handlers>
