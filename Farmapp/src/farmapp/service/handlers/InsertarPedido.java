@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -27,36 +28,69 @@ public class InsertarPedido extends Handler {
 	@Override
 	public String process(HttpServletRequest request)
 			throws MissingRequiredParameter {
+				
+		String id_usuario = request.getParameter("id_usuario");
+		String nombre = request.getParameter("nombre");
 		
-		String email = request.getParameter("email");//El email del admin de farmacia para comprobar su idtipo
-		String cantidad = request.getParameter("cantidad");
+		String[] productos = request.getParameterValues("producto");
+		String[] cantidades = request.getParameterValues("cantidad");
 		
-
+		
 	
-	
-
-		
 		try {
 			connection = dataSource.getConnection();
 			statement = connection.createStatement();
 			ResultSet resultSet = null;
 			
-			 String query = "select * from usuarios where email  = '" + email + "'";
-				resultSet = statement.executeQuery(query);
+			
+			
+			//recogemos también el id_farmacia para después
+			String query2 = "select * from farmacias where nombre  = '" + nombre + "'";
+			resultSet = statement.executeQuery(query2);
+			resultSet.next();
+			int idfarmacia=resultSet.getInt("id_farmacia");
+			
+			//Ahora creamos el pedido
+			statement.execute("insert into pedidos (id_usuario,estado) values ('"+id_usuario+"', 'no entregado');");
+			String query3="select * from pedidos";
+			resultSet = statement.executeQuery(query3);
+			resultSet.last();
+			int idpedido=resultSet.getInt("id_pedido");
+			
+			//Y finalmente metemos todos los productos en su tablica
+			for(int i=0; i< productos.length; i++)
+			{
+				//Aqui dentro ya tengo las cantidades y los productos
+				
+				//busco id producto
+				String query4 = "select id_producto from productos where nombre='"+productos[i]+"'";
+				resultSet = statement.executeQuery(query4);
 				resultSet.next();
-				int id_usuario=resultSet.getInt("id_usuario");
-				int id_tipo=resultSet.getInt("id_tipo");
-				if(id_tipo==3){
-					statement.execute("insert into pedidos (id_usuario,estado) values ('"+id_usuario+"', 'no entregado');");
-					String query2="select * from pedidos";
-					resultSet = statement.executeQuery(query2);
-					resultSet.last();
-					int id_pedido=resultSet.getInt("id_pedido");
-					//System.out.println("el ultimo pedido es el numero"+id_pedido);
+				int idproducto=resultSet.getInt("id_producto");
+				
+				//busco id farm prod
+				String query5 = "select id_farmprod from farm_prod where id_farmacia='"+idfarmacia+"' and id_producto='"+idproducto+"';";
+				resultSet = statement.executeQuery(query5);
+				resultSet.next();
+				int idfarmprod=resultSet.getInt("id_farmprod");
+				
+				//Compruebo todo
+				System.out.println("Id producto: "+idproducto);
+				System.out.println("Producto: "+productos[i]);
+				System.out.println("Cantidad: "+cantidades[i]);
+				System.out.println("Id Farmacia_producto: "+idfarmprod);
+				
+				//HAGO EL INSERT
+				statement.execute("insert into pedidos_farm_prod values ('"+idpedido+"','"+idfarmprod+"','"+cantidades[i]+"');");
+				
+				
+			}
+			
+			
+			//System.out.println("el ultimo pedido es el numero"+id_pedido);
+			
+			
 					
-				}else{
-					return "{\"status\":\"KO\", \"result\": \"El usuario no tiene privilegios para crear pedidos\"}";
-				}
 
 			
 		
