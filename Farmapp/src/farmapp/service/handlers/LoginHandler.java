@@ -31,7 +31,7 @@ public class LoginHandler extends Handler {
 		
 		
 		//if (username == null || password == null) {
-		if (email == null) {
+		if (email == null || password == null) {
 			throw new MissingRequiredParameter();
 		}
 
@@ -41,8 +41,7 @@ public class LoginHandler extends Handler {
 			// Get Connection and Statement
 			connection = dataSource.getConnection();
 			statement = connection.createStatement();
-			String query = "SELECT * FROM usuarios WHERE email='" + email
-					+ "'";
+			String query = "SELECT * FROM usuarios WHERE email='"+email+"' AND password='"+password+"'";
 			resultSet = statement.executeQuery(query);
 			// System.out.println("Query executed");
 			if (resultSet.next()) {
@@ -69,7 +68,7 @@ public class LoginHandler extends Handler {
 					result = "{\"status\":\"KO\", \"result\": \"Contraseña incorrecta.\"}";
 				}*/
 			} else {
-				result = "{\"status\":\"KO\", \"result\": \"Usuario desconocido.\"}";
+				result = "{\"status\":\"KO\", \"result\": \"Usuario desconocido o password incorrecto.\"}";
 			}
 		} catch (SQLException e) {
 			result = "{\"status\":\"KO\", \"result\": \"Error en el acceso a la base de datos.\"}";

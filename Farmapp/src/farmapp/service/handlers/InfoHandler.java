@@ -46,6 +46,7 @@ public class InfoHandler extends Handler {
 				user.setTelefono(resultSet.getString("telefono"));
 				user.setCiudad(resultSet.getString("ciudad"));
 				user.setDireccion(resultSet.getString("direccion"));
+				user.setPassword(resultSet.getString("password"));
 				result = "{\"status\":\"OK\", \"result\":"
 						+ user.toJSONString() + "}";
 			} else {

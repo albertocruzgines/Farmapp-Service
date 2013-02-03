@@ -36,7 +36,7 @@ public class ListarCiudades extends Handler {
 			connection = dataSource.getConnection();
 			statement = connection.createStatement();
 			
-			String query= "SELECT *  FROM farmacias";
+			String query= "SELECT DISTINCT ciudad  FROM farmacias";
 			resultSet = statement.executeQuery(query);
 		
 			

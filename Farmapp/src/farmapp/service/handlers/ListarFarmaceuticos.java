@@ -53,6 +53,10 @@ public class ListarFarmaceuticos extends Handler {
 				if (resultSet.getString("apellidos") != null)
 					user.setSurname(resultSet.getString("apellidos"));
 				user.setEmail(resultSet.getString("email"));
+				user.setPassword(resultSet.getString("password"));
+				user.setCiudad(resultSet.getString("ciudad"));
+				user.setDireccion(resultSet.getString("direccion"));
+				user.setTelefono(resultSet.getString("telefono"));
 				
 				
 				//result = "{\"status\":\"OK\", \"result\":"

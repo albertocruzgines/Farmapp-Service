@@ -14,9 +14,7 @@ import org.json.simple.parser.ParseException;
 import farmapp.model.KeyFinder;
 
 
-
 public class Registrarfarmacia extends Handler {
-	
 	
 
 	private Connection connection;

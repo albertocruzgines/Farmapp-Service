@@ -1,59 +1,54 @@
+
 package farmapp.service.handlers;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+public class updateproducto extends Handler {
 
-public class InsertarProductos extends Handler {
-
-
+	
 	private Connection connection;
 	private Statement statement;
-
-	public InsertarProductos() {
+	
+	public updateproducto(){
 		super();
 	}
-
+	
 	@Override
 	public String process(HttpServletRequest request)
 			throws MissingRequiredParameter {
+		// TODO Auto-generated method stub
+		
+		String idproducto = request.getParameter("id_producto");
 		
 		String nombre = request.getParameter("producto"); //El email del admin de farmacia para comprobar su idtipo
 		String tipo = request.getParameter("tipo");
 		String descripcion = request.getParameter("descripcion");
+		//Esto es si esque se puede pasar el id_usuario por web
 		
-System.out.println("producto: "+nombre+" descipción: "+descripcion+ " tipo: "+tipo);
 		
-		try {
+		try{
+		
 			connection = dataSource.getConnection();
 			statement = connection.createStatement();
 			ResultSet resultSet = null;
-
-				String QUERY = "INSERT INTO productos (nombre, tipo, descripcion) VALUES ('"+nombre+"', '"+tipo+"', '"+descripcion+"');";
-				//statement.execute("insert into productos (nombre, tipo, descripcion) values ('"+nombre+"', '"+tipo+"''"+descripcion+"');");
-			System.out.println(QUERY);
-				statement.execute(QUERY);
-
-
+			statement.executeUpdate("UPDATE productos SET nombre='"+nombre+"', tipo='"+tipo+"', descripcion='"+descripcion+"' WHERE id_producto='"+idproducto+"';");
+			
+			//statement.executeUpdate("UPDATE usuarios SET email='"+email+"', password='"+password+"', nombre='"+nombre+"', apellidos='"+apellidos+"', direccion='"+direccion+"', ciudad='"+ciudad+"', telefono='"+telefono+"' WHERE id_usuario='"+idusuario+"';");
 			
 		} catch (SQLException e) {
 			// e.printStackTrace();
 			return "{\"status\":\"KO\", \"result\": \"Error en el acceso a la base de datos.\"}";
 		}
-
-
-		String result = "{\"status\":\"OK\", \"result\": \"Producto creado correctamente.\"}";
-		return result;
+	
+		String result = "{\"status\":\"OK\", \"result\": \"Datos del producto actualizados correctamente\"}";
+		return result.toString();
 	}
-
-
-
+	
 	
 
 }

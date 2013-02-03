@@ -39,7 +39,7 @@ public class ListProd extends Handler {
 			connection = dataSource.getConnection();
 			statement = connection.createStatement();
 			
-			String query2= "SELECT *  FROM farmacias WHERE (nombre)='" + nombre + "'";
+			String query2= "SELECT * FROM farmacias WHERE (nombre)='" + nombre + "'";
 			resultSet = statement.executeQuery(query2);
 			resultSet.next();
 			
@@ -49,7 +49,7 @@ public class ListProd extends Handler {
 					//	"WHERE farm_prod.id_producto=productos.id_producto " +
 						//"AND farm_prod.id_farmacia= '" + id_farmacia + "'"; 
 				
-				String query = "SELECT productos.nombre, productos.tipo, productos.cantidad, productos.descripcion, productos.receta, farm_prod.precio FROM productos, farm_prod WHERE farm_prod.id_farmacia='"+id_farmacia+"' AND farm_prod.id_producto=productos.id_producto";
+				String query = "SELECT * FROM productos, farm_prod WHERE farm_prod.id_farmacia='"+id_farmacia+"' AND farm_prod.id_producto=productos.id_producto";
 
 				
 				resultSet = statement.executeQuery(query);
@@ -66,12 +66,13 @@ public class ListProd extends Handler {
 				if (resultSet.getString("nombre") != null)
 					prod.setProducto(resultSet.getString("nombre"));
 				
+				prod.setId(resultSet.getInt("id_producto"));
+				prod.setFarmacia(String.valueOf(id_farmacia));
 				prod.setTipo(resultSet.getString("tipo"));
 				prod.setcantidad(resultSet.getString("cantidad"));
 				prod.setdescripcion(resultSet.getString("descripcion"));
-				prod.setreceta(resultSet.getString("receta"));
 				prod.setprecio(resultSet.getString("precio"));
-				
+				prod.setreceta(resultSet.getString("receta"));
 				
 				//result = "{\"status\":\"OK\", \"result\":"
 					//	+ farm.toJSONString() + "}";

@@ -23,6 +23,7 @@ public class User implements JSONAware  {
 	private String direccion;
 	private String telefono;
 	private String ciudad;
+	private String password;
 	private long idtipo;
 	
 	public long getIdtipo(){
@@ -40,6 +41,9 @@ public class User implements JSONAware  {
 	 */
 	public long getId() {
 		return id;
+	}
+	public String password() {
+		return password;
 	}
 
 	/**
@@ -135,7 +139,10 @@ public class User implements JSONAware  {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
+	public void setPassword(String password) {
+		// TODO Auto-generated method stub
+		this.password = password;
+	}
 	@Override
 	public String toJSONString() {
 		StringBuffer sb = new StringBuffer();
@@ -168,6 +175,11 @@ public class User implements JSONAware  {
 		sb.append("\"" + JSONObject.escape("telefono") + "\"");
 		sb.append(":");
 		sb.append("\"" + JSONObject.escape(telefono) + "\"");
+
+		sb.append(",");
+		sb.append("\"" + JSONObject.escape("password") + "\"");
+		sb.append(":");
+		sb.append("\"" + JSONObject.escape(password) + "\"");
 
 		sb.append(",");
 
@@ -236,4 +248,6 @@ public class User implements JSONAware  {
 		//System.out.println(u.getId() + " " + u.getUsername() + " "
 			//	+ u.getName() + " " + u.getSurname() + " " + u.getEmail());
 	}
+
+	
 }

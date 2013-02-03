@@ -9,57 +9,53 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.json.simple.JSONArray;
 
-import farmapp.model.Producto;
+import farmapp.model.Farmacia;
 import farmapp.model.User;
 
 
 
-public class ListarProductos extends Handler {
+public class ListFarmCiudad extends Handler {
 
-	
 	private Connection connection;
 	private Statement statement;
 
-	public ListarProductos() {
+	public ListFarmCiudad() {
 		super();
 	}
-
 	@Override
 	public String process(HttpServletRequest request)
 			throws MissingRequiredParameter {
 		ResultSet resultSet = null;
-		String farmID = request.getParameter("farmID");
-
-		//String result = null;
+		String ciudad = request.getParameter("ciudad");
+		
 		JSONArray result = new JSONArray();
 		//String result;
-		
-		try {
+				try {
 			// Get Connection and Statement
 			connection = dataSource.getConnection();
 			statement = connection.createStatement();
-						
-				String query = "SELECT * FROM productos";
-				resultSet = statement.executeQuery(query);
 			
-			while (resultSet.next()) {
-				
-				Producto prod = new Producto();
+				String query = "SELECT * FROM farmacias WHERE ciudad = '"+ciudad+"'";
+				resultSet = statement.executeQuery(query);
 							
-				prod.setProducto(resultSet.getString("nombre"));
-				prod.setTipo(resultSet.getString("tipo"));
-				prod.setcantidad(resultSet.getString("cantidad"));
-				prod.setdescripcion(resultSet.getString("descripcion"));
-				prod.setreceta(resultSet.getString("receta"));
-				prod.setprecio(resultSet.getString("precio"));
-				prod.setId(resultSet.getInt("id_producto"));
-
-				result.add(prod);
-			}
-				
-			//} else {
-				//return "{\"status\":\"KO\", \"result\": \"Farmacia desconocida.\"}";
-			//}
+				while (resultSet.next()) {
+									
+					Farmacia farm = new Farmacia();
+					
+					farm.setId(resultSet.getInt("id_farmacia"));
+					if (resultSet.getString("nombre") != null)
+					farm.setName(resultSet.getString("nombre"));
+					
+					farm.setciudad(resultSet.getString("ciudad"));
+					farm.setdireccion(resultSet.getString("direccion"));
+					farm.sethorario(resultSet.getString("horario"));
+				//	farm.setlongitud(resultSet.getString("longitud"));
+				//	farm.setlatitud(resultSet.getString("latitud"));
+			
+		
+					result.add(farm);
+				}
+	
 		} catch (SQLException e) {
 			return "{\"status\":\"KO\", \"result\": \"Error en el acceso a la base de datos.\"}";
 		} finally {
@@ -83,7 +79,7 @@ public class ListarProductos extends Handler {
 			}
 		}
 
-		return "{\"status\":\"OK\", \"farmID\":" + farmID+ ", \"result\":" +result.toString() + "}";
+		return "{\"status\":\"OK\", \"result\":" +result.toString() + "}";
 	}
 
 

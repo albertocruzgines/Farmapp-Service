@@ -27,12 +27,12 @@ public class SearchHandler extends Handler {
 		try {
 			connection = dataSource.getConnection();
 			statement = connection.createStatement();
-			String sql = "select * from usuarios where email like '" + query
+			String sql = "select * from farmacias where nombre like '" + query
 					+ "%'";
 			resultSet = statement.executeQuery(sql);
 			result = new StringBuffer("{\"status\":\"OK\", \"result\": [");
 			while (resultSet.next()) {
-				String next = resultSet.getString("email");
+				String next = resultSet.getString("nombre");
 				result.append("\"" + next + "\",");
 			}
 			if (result.charAt(result.length() - 1) == ',')

@@ -21,6 +21,7 @@ public class Pedidos implements JSONAware {
 	private String nombreuser;
 	private String fecha;
 	private String nombreprod;
+	private String estado;
 	
 	public String getNameProd() {
 		return nombreprod;
@@ -33,9 +34,13 @@ public class Pedidos implements JSONAware {
 	public void setNameProd(String nombreprod) {
 		this.nombreprod= nombreprod;
 	}
+	public void setestado(String estado) {
+		this.estado= estado;
+	}
 	
-	
-	
+	public String getestado(){
+		return estado;
+	}
 	public long getIdpedido(){
 		return idpedido;
 	}
@@ -121,10 +126,7 @@ public class Pedidos implements JSONAware {
 
 		sb.append(",");
 		
-		
-
-	
-		
+			
 		sb.append("\"" + JSONObject.escape("producto") + "\"");
 		sb.append(":");
 		sb.append("\"" + JSONObject.escape(nombreprod) + "\"");
@@ -164,6 +166,11 @@ public class Pedidos implements JSONAware {
 		sb.append("\"" + JSONObject.escape("fecha") + "\"");
 		sb.append(":");
 		sb.append("\"" + JSONObject.escape(fecha) + "\"");
+		sb.append(",");
+		
+		sb.append("\"" + JSONObject.escape("estado") + "\"");
+		sb.append(":");
+		sb.append("\"" + JSONObject.escape(estado) + "\"");
 		sb.append(",");
 		
 		sb.append("}");
@@ -207,6 +214,8 @@ public class Pedidos implements JSONAware {
 				ped.setNameUser(entry.getValue().toString());
 			else if (entry.getKey().equals("fecha"))
 				ped.setfecha(entry.getValue().toString());
+			else if (entry.getKey().equals("estado"))
+				ped.setestado(entry.getValue().toString());
 			
 
 			

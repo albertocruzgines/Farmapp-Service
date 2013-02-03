@@ -15,9 +15,6 @@ public class EliminarProductos extends Handler {
 	
 
 
-	
-	
-
 	private Connection connection;
 	private Statement statement;
 
@@ -29,13 +26,9 @@ public class EliminarProductos extends Handler {
 	public String process(HttpServletRequest request)
 			throws MissingRequiredParameter {
 		
-		String nombre = request.getParameter("nombre"); //El email del admin de farmacia para comprobar su idtipo
-	
+		String nombre = request.getParameter("producto"); //El email del admin de farmacia para comprobar su idtipo
+	System.out.println("producto: "+nombre);
 
-	
-	
-
-		
 		try {
 			connection = dataSource.getConnection();
 			statement = connection.createStatement();

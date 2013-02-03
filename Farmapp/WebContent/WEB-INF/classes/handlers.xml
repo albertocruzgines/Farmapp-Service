@@ -42,6 +42,10 @@
     	<handler-class>farmapp.service.handlers.ListProd2</handler-class>   
 	</handler>
 	<handler>
+    	<action auth="true">listproduct</action>
+    	<handler-class>farmapp.service.handlers.ListProd</handler-class>   
+	</handler>
+	<handler>
     	<action auth="true">listpedidosfarm</action>
     	<handler-class>farmapp.service.handlers.ListPedidosFarm</handler-class>   
 	</handler>
@@ -70,12 +74,21 @@
     	<handler-class>farmapp.service.handlers.InsertarPedido</handler-class>   
 	</handler>
 	<handler>
+    	<action auth="true">updateproducto</action>
+    	<handler-class>farmapp.service.handlers.updateproducto</handler-class>   
+	</handler>
+	
+	<handler>
     	<action auth="true">listciudades</action>
     	<handler-class>farmapp.service.handlers.ListarCiudades</handler-class>   
 	</handler>
 	<handler>
     	<action auth="true">listfarmaceuticos</action>
     	<handler-class>farmapp.service.handlers.ListarFarmaceuticos</handler-class>   
+	</handler>
+	<handler>
+    	<action auth="true">updateadmin</action>
+    	<handler-class>farmapp.service.handlers.UpdateAdmin</handler-class>   
 	</handler>
 	<handler>
     	<action>listfarmacias</action>
@@ -102,4 +115,25 @@
     	<action auth="true">listproductos</action>
     	<handler-class>farmapp.service.handlers.ListarProductos</handler-class>   
 	</handler>
+	
+
+<handler>
+    	<action auth="true">updateinfo</action>
+    	<handler-class>farmapp.service.handlers.modificarusuario</handler-class>   
+	</handler>
+	
+<handler>
+    	<action auth="true">newfarmaceutico</action>
+    	<handler-class>farmapp.service.handlers.NuevoFarmaceutico</handler-class>   
+	</handler>
+	
+<handler>
+	    <action auth="true">updateestado</action>
+	    <handler-class>farmapp.service.handlers.ProcesarPedido</handler-class>
+	</handler>
+	<handler>
+    	<action auth="true">listprodfarm</action>
+    	<handler-class>farmapp.service.handlers.ListarProdFarm</handler-class>   
+	</handler>
+
 </handlers>

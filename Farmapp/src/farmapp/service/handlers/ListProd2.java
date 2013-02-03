@@ -58,7 +58,7 @@ public class ListProd2 extends Handler {
 				
 				if(id_farmacia > 0){
 					
-					String query = "SELECT productos.nombre, productos.tipo, productos.cantidad, " +
+					String query = "SELECT productos.nombre, productos.tipo, farm_prod.stock, " +
 							"productos.descripcion, productos.receta, farm_prod.precio " +
 							"FROM productos, farm_prod " +
 							"WHERE farm_prod.id_farmacia='"+id_farmacia+"' " +
@@ -74,7 +74,7 @@ public class ListProd2 extends Handler {
 						
 						//prod.setFarmacia(nombre_farmacia);
 						prod.setTipo(resultSet.getString("tipo"));
-						prod.setcantidad(resultSet.getString("cantidad"));
+						prod.setcantidad(resultSet.getString("stock"));
 						prod.setdescripcion(resultSet.getString("descripcion"));
 						prod.setreceta(resultSet.getString("receta"));
 						prod.setprecio(resultSet.getString("precio"));
